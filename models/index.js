@@ -28,8 +28,7 @@ const Page = db.define('page', {
         route: function() {
             return '/wiki/' + this.urlTitle;
         }
-    }
-}, {
+    },
     hooks: {
         beforeValidate: function(page) {
             if (page.title) {

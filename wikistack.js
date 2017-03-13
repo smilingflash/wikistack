@@ -15,7 +15,6 @@ var env = nunjucks.configure('views', { noCache: true });
 app.engine('html', nunjucks.render); // when res.render works with html files, have it use nunjucks to do so
 app.set('view engine', 'html'); // have res.render work with html files
 
-
 // middleware logger
 app.use(morgan('dev'));
 
@@ -26,13 +25,13 @@ app.use(bodyParser.json()); // would be for AJAX requests
 app.use(express.static(path.join(__dirname, '/public')));
 
 // router to serve up index.html
-app.use('/', wikiRouter);
+app.use('/wiki', wikiRouter);
 
 // syncing the our models page to the database
 models.User.sync({})
     .then(function() {return models.Page.sync({})})
-    .then(function() {  // server
-        app.listen(3000, function() {
+    .then(function() {
+        app.listen(3000, function() {  // server
             console.log('Server is listening on port 3000!');
         });
     })
