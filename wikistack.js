@@ -30,13 +30,10 @@ app.use('/', wikiRouter);
 
 // syncing the our models page to the database
 models.User.sync({})
-    .then(function() {
-        return models.Page.sync({})
-    })
-    // server
-    .then(function() {
+    .then(function() {return models.Page.sync({})})
+    .then(function() {  // server
         app.listen(3000, function() {
-            console.log('Server is listening on port 3001!');
+            console.log('Server is listening on port 3000!');
         });
     })
     .catch(console.error);
